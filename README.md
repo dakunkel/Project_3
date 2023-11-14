@@ -1,1 +1,5 @@
-# Project_3
+# Project 3 - Team Ripples
+
+### AMAZING THINGS COMING SOON!
+
+##### NEXT GENERATION MARKETPLACE: 11/29/23
