@@ -84,6 +84,10 @@ st.sidebar.text_input("Account Address")
 st.sidebar.markdown("Cost: :green[0.10] ETH")
 st.sidebar.button("Purchase")
 
+seller_address = ""
+recipient_address = ""
+cost = 100000000000000000
+
 ################################################
 #Test Streamlit
 text_input_for_AI_call = st.text_input("What do you want to see in your image?")
