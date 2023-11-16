@@ -79,9 +79,8 @@ st.text(" \n")
 # Streamlit Sidebar Code - Start
 
 st.sidebar.markdown("# Do you want to buy your NFT?")
-st.sidebar.markdown("## Enter Your Account Address")
+st.sidebar.markdown("## Enter Your Account Address & Buy Below")
 st.sidebar.text_input("Account Address")
-st.sidebar.markdown("Cost: :green[0.10] ETH")
 st.sidebar.button("Purchase")
 
 ################################################
