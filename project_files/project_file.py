@@ -9,10 +9,21 @@ import json
 from web3 import Web3
 from pathlib import Path
 import streamlit as st
+import hashlib
 
 # Define Functions
 # ----------
 # Make NFT Function
+
+def hash_image(file_path):
+    # Read the content of the image file in binary mode
+    with open(file_path, 'rb') as file:
+        image_content = file.read()
+    # Calculate the SHA-256 hash
+    sha256_hash = hashlib.sha256(image_content).hexdigest()
+    return sha256_hash
+
+
 def make_nft(text_input_for_AI_call):
     response = requests.post(
     "https://api.deepai.org/api/text2img",
@@ -75,18 +86,8 @@ st.markdown("#### Each NFT costs 0.10 ETH")
 st.markdown("Example prompt: Generate a captivating and vibrant digital artwork featuring a diverse array of birds in a lush, otherworldly aviary. Envision a kaleidoscope of feathery hues, with meticulously detailed plumage showcasing a range of colors from iridescent blues and greens to warm sunset oranges. The scene is set against a surreal backdrop that seamlessly blends elements of nature and fantasy – imagine towering, ethereal trees with branches that intertwine to create natural perches for the birds, and cascading waterfalls that form crystal-clear pools reflecting the avian splendor. The birds themselves should vary in species, size, and pose, capturing moments of graceful flight, playful interaction, and serene repose. The play of light and shadow should add depth to the composition, creating a visually stunning and immersive experience that celebrates the beauty and diversity of our feathered friends.")
 st.text(" \n")
 
-################################################
-# Streamlit Sidebar Code - Start
-
-st.sidebar.markdown("# Do you want to buy your NFT?")
-st.sidebar.markdown("## Enter Your Account Address")
-st.sidebar.text_input("Account Address")
-st.sidebar.markdown("Cost: :green[0.10] ETH")
-st.sidebar.button("Purchase")
-
-seller_address = ""
-recipient_address = ""
-cost = 100000000000000000
+image_name = ""
+image_hash = ""
 
 ################################################
 #Test Streamlit
@@ -96,3 +97,21 @@ if st.button("Make me an NFT"):
     image_name = make_nft(text_input_for_AI_call)
     st.write("Your NFT is now available:")
     st.image(f"generated_images/{image_name}", width=800)
+    file_path = f"generated_images/{image_name}"
+    image_hash = hash_image(file_path)
+    st.write(f"The SHA-256 hash of the image is: {image_hash}")
+
+################################################
+# Streamlit Sidebar Code - Start
+
+st.sidebar.markdown("# Do you want to buy your NFT?")
+st.sidebar.markdown("## Enter Your Account Address")
+st.sidebar.text_input("Account Address")
+st.sidebar.markdown("Cost: :green[0.10] ETH")
+st.sidebar.markdown(f"Image ID: {image_name}")
+st.sidebar.markdown(f"Image Hash: {image_hash}")
+st.sidebar.button("Purchase")
+
+seller_address = ""
+recipient_address = ""
+cost = 100000000000000000
