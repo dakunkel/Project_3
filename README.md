@@ -1,5 +1,13 @@
 # FinTech Capstone Project - NFT Creator by *Team Ripples*
 
+## Table of Contents
+* [Summary](#summary)
+* [Software and Technologies](#software-and-technologies-used)
+* [Usage and Installation](#usage-and-installation)
+* [Future Improvements](future-improvements)
+* [Files](#files)
+* [Team Information](#team-information)
+
 ## Summary
 
 Over the last few years, two groundbreaking concepts have emerged as pinnacles of innovation. Non-Fungible Tokens, or NFTs have taken the world by storm, revolutionizing ownership and authenticity in the digital space. These unique cryptographic tokens, built on blockchain technology allow for the creation of one-of-a-kind verifiable digital assets. Simultaneously, humans are just scraping the surface of what’s possible with Artificial Intelligence, or AI. Machine learning algorithms, natural language processing, and other forms of Artificial Intelligence have the opportunity to transform industries in years to come. This project serves to marry the two concepts into one cohesive use case. 
@@ -16,7 +24,7 @@ The marrying of NFTs and AI within our platform represents the forward thinking 
 - Smart Contract leveraged capability stored in .json files for customizable API communication and request calls.
 
 
-## Software & Technologies
+## Software and Technologies
 
 ### Technologies
 - **Python3**
@@ -60,7 +68,7 @@ Custom Libraries Used:
 - `makeNFT()`: Uses DeepAI’s Image Generator API to create an NFT based on the users input.
 - `purchaseNFT()`: Allows a user to purchase the generated NFT using Ethereum. This API lives in the `NFTCreator` Solidity Smart Contract.
 
-## Usage & Installation
+## Usage and Installation
 
 This application is hosted locally through Streamlit (UI) and is based in Python3 and Solidity. In order to launch this application locally, you’ll need to follow the steps below.
 
@@ -114,10 +122,19 @@ pip install os requests web3 python-io json dotenv pillow hashlib streamlit
 3. Access the UI using http://192.168.5.3:8501 or http://localhost:8501 to start generating and purchasing NFTs!
 
 
-## Future Improvements Roadmap:
+## Future Improvements
 
 - Validity functionality to verify if a digital asset is indeed specific, verified artwork based on instance-generated Transaction Hash.
 - Create a decentralized marketplace to view and purchase other AI / User generated NFTs stored on ‘mainnet’ Ethereum network.
 - Provide a more robust, dynamic “Dashboard experience” on Streamlit that provides actual banking information.
 - Integrate other Web3.0 social platforms and dApps like OpenSea.io, UniSwap, etc.
   
+
+## Files
+* [Python application with Streamlit integration](./project_files/ai_nft.py)
+* [Solidity Smart Contract](./project_files/AI_NFT.sol)
+* [Customer Pinata API](./project_files/pinata.py)
+
+## Team Information
+Group 3 - The Ripples
+**Team Members**: Dane Kunkel, Sreya Nalla, Brandon Anderson, Alexis Reyes
