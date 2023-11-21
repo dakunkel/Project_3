@@ -1,4 +1,4 @@
-# Project 3 - Team Ripples
+# Project 3  - Team Ripples
 
 Features to be incorporated into unique user empowered NFT platform:
 
