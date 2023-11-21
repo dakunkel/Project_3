@@ -16,14 +16,12 @@ from pinata import pin_file_to_ipfs, pin_json_to_ipfs, convert_data_to_json
 # Define and connect a new Web3 provider
 w3 = Web3(Web3.HTTPProvider(os.getenv("WEB3_PROVIDER_URI")))
 
-#Load API Key
+#Load API Key for Image Generator
 ai_api_key = os.getenv("DEEPAI")
 
 ################################################################################
 # Load_Contract Function
 ################################################################################
-
-
 @st.cache(allow_output_mutation=True)
 def load_contract():
 
@@ -42,14 +40,11 @@ def load_contract():
 
     return contract
 
-
 # Load the contract
 contract = load_contract()
 
-# Define Functions
-# ----------
-# Make NFT Function
 
+# Hash Image for block
 def hash_image(file_path):
     # Read the content of the image file in binary mode
     with open(file_path, 'rb') as file:
@@ -58,8 +53,10 @@ def hash_image(file_path):
     sha256_hash = hashlib.sha256(image_content).hexdigest()
     return sha256_hash
 
-
+# Make NFT
 def make_nft(text_input_for_AI_call):
+
+    # make a call to Image Generator using user input
     response = requests.post(
     "https://api.deepai.org/api/text2img",
     data={
@@ -68,13 +65,13 @@ def make_nft(text_input_for_AI_call):
     },
     headers={'api-key': ai_api_key}
     )
-    print(response.json()['output_url'])
+
     image_url = response.json()['output_url']
     image_name = save_nft(response)
     
     return image_name, image_url
     
-# Save NFT Function
+# Save NFT to a specified file path
 def save_nft(response):
     if response.status_code == 200:
         try:
@@ -108,6 +105,7 @@ def save_nft(response):
     else:
             print(f"Error: {response.status_code} - {response.text}")
 
+## Pin the file to IPFS
 def pin_nft(imageID, image_url):
     # Pin the file to IPFS with Pinata
     ipfs_file_hash = pin_file_to_ipfs(image_url)
@@ -124,16 +122,6 @@ def pin_nft(imageID, image_url):
 
     return json_ipfs_hash, token_json
 
-
-################################################
-# Session variables
-# if "image_name" not in st.session_state:
-#     st.session_state.image_name = ""
-# if "image_hash" not in st.session_state:
-#     st.session_state.image_hash = ""
-# if "image_url" not in st.session_state:
-#     st.session_state.image_url = ""
-
 ################################################
 # Streamlit application headings
 st.markdown("# Create your own NFT!")
@@ -142,40 +130,42 @@ st.markdown("#### Each NFT costs 0.10 ETH")
 st.markdown("Example prompt: Generate a captivating and vibrant digital artwork featuring a diverse array of birds in a lush, otherworldly aviary.")
 st.text(" \n")
 
-# image_name = ""
-# image_hash = ""
-# image_url = ""
-
 ################################################
 # Streamlit Sidebar Code - Start
 
 st.sidebar.markdown("# Do you want to buy your NFT?")
 st.sidebar.markdown("## Enter Your Account Address")
 st.sidebar.markdown("Cost: :green[0.10] ETH")
+
+# set purchase address as session var to prevent data from getting cleared
 purchaseAddress = st.sidebar.text_input("Account Address")
-# if "purchaseAddress" not in st.session_state:
 st.session_state.purchaseAddress = purchaseAddress
 
 
 ################################################
-#Test Streamlit
 text_input_for_AI_call = st.text_input("What do you want to see in your image?")
 if st.button("Make me an NFT"):
+
     #Initiate Request for Image
     image_name, image_url = make_nft(text_input_for_AI_call)
+    
+    # Save as session var to prevent data from getting cleared
     if "image_name" not in st.session_state:
         st.session_state.image_name = image_name
     if "image_url" not in st.session_state:
         st.session_state.image_url = image_url
 
+    # Display image to user
     st.write("Your NFT is now available:")
     st.image(f"generated_images/{image_name}", width=800)
     file_path = f"generated_images/{image_name}"
+    
     image_hash = hash_image(file_path)
     if "image_hash" not in st.session_state:
         st.session_state.image_hash = image_hash 
+    
+    # Print image details
     st.write(f"The SHA-256 hash of the image is: {image_hash}")
-    # if (image_name != null and image_hash != null):
     st.markdown(f"Image ID: {image_name}")
     st.markdown(f"Image Hash: {image_hash}")
 
@@ -183,6 +173,8 @@ if st.button("Make me an NFT"):
 # Purchase new NFT
 ################################################################################
 if st.sidebar.button("Purchase"):
+    
+    # reload all session variables. only proceed if all are present
     if (st.session_state.image_name 
         and st.session_state.image_url 
         and st.session_state.image_hash
@@ -200,6 +192,7 @@ if st.sidebar.button("Purchase"):
 
         nft_uri = f"ipfs://{nft_ipfs_hash}"
         
+        # execute transaction by engagin solidity
         tx_hash = contract.functions.purchaseNFT(
             purchaseAddress, 
             image_name, #imageID 
@@ -208,7 +201,8 @@ if st.sidebar.button("Purchase"):
             nft_uri #tokenURI
         ).transact({"from": purchaseAddress, "gas": 3000000})
         receipt = w3.eth.waitForTransactionReceipt(tx_hash)
-        
+
+        # show proof of transaction
         st.sidebar.write("Transaction receipt mined:")
         st.sidebar.write(dict(receipt))
         st.sidebar.write("You can view the pinned metadata file with the following IPFS Gateway Link")
@@ -218,17 +212,3 @@ if st.sidebar.button("Purchase"):
         st.write("You haven't made an NFT yet")
 
 st.markdown("---")
-
-
-
-seller_address = ""
-recipient_address = ""
-cost = 100000000000000000
-
-
-# address owner, 
-# string memory imageID, 
-# uint256 purchasePrice;
-# string memory imageHash,
-# string memory tokenURI, 
-# string memory tokenJSON
