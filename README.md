@@ -137,4 +137,5 @@ pip install os requests web3 python-io json dotenv pillow hashlib streamlit
 
 ## Team Information
 Group 3 - The Ripples
+
 **Team Members**: Dane Kunkel, Sreya Nalla, Brandon Anderson, Alexis Reyes
