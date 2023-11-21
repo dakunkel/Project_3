@@ -3,8 +3,10 @@
 ## Summary
 
 	Over the last few years, two groundbreaking concepts have emerged as pinnacles of innovation. Non-Fungible Tokens, or NFTs have taken the world by storm, revolutionizing ownership and authenticity in the digital space. These unique cryptographic tokens, built on blockchain technology allow for the creation of one-of-a-kind verifiable digital assets. Simultaneously, humans are just scraping the surface of what’s possible with Artificial Intelligence, or AI. Machine learning algorithms, natural language processing, and other forms of Artificial Intelligence have the opportunity to transform industries in years to come. This project serves to marry the two concepts into one cohesive use case. 
-	We’ve created a platform where users can effortlessly generate tokens of personalized artwork. By simply typing in their preferences, users can harness the power of Artificial Intelligence to craft and mint distinct NFT images on the blockchain. To do this, we created a  smart contact using a mixture of Python and Solidity, while utilizing Streamlit as the user’s frontend interface. 
-	The marrying of NFTs and AI within our platform represents the forward thinking application of these concepts in fintech. Both concepts have already begun to disturb the industry. As time goes on we’ll continue to see the convergence of NFTs and AI in FinTech. 
+ 
+ We’ve created a platform where users can effortlessly generate tokens of personalized artwork. By simply typing in their preferences, users can harness the power of Artificial Intelligence to craft and mint distinct NFT images on the blockchain. To do this, we created a  smart contact using a mixture of Python and Solidity, while utilizing Streamlit as the user’s frontend interface. 
+ 
+ The marrying of NFTs and AI within our platform represents the forward thinking application of these concepts in fintech. Both concepts have already begun to disturb the industry. As time goes on we’ll continue to see the convergence of NFTs and AI in FinTech. 
 	
 
 ## Technologies
