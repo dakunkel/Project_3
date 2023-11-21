@@ -96,10 +96,10 @@ pip install os requests web3 python-io json dotenv pillow hashlib streamlit
 
 ### Running the Streamlit Application
 
-1. Download/import `pinata.py` and `project_file.py` 
-2. In the same directory as `project_file.py`, run the following command
+1. Download/import `pinata.py` and `ai_nft.py` 
+2. In the same directory as `ai_nft.py`, run the following command
   ```
-  Streamlit run ./project_file.py
+  Streamlit run ./ai_nft.py
   ```
 
   The output will look like:
