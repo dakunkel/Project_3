@@ -139,7 +139,7 @@ def pin_nft(imageID, image_url):
 st.markdown("# Create your own NFT!")
 st.markdown("### Generate an NFT with AI and claim as your own")
 st.markdown("#### Each NFT costs 0.10 ETH")
-st.markdown("Example prompt: Generate a captivating and vibrant digital artwork featuring a diverse array of birds in a lush, otherworldly aviary. Envision a kaleidoscope of feathery hues, with meticulously detailed plumage showcasing a range of colors from iridescent blues and greens to warm sunset oranges. The scene is set against a surreal backdrop that seamlessly blends elements of nature and fantasy – imagine towering, ethereal trees with branches that intertwine to create natural perches for the birds, and cascading waterfalls that form crystal-clear pools reflecting the avian splendor. The birds themselves should vary in species, size, and pose, capturing moments of graceful flight, playful interaction, and serene repose. The play of light and shadow should add depth to the composition, creating a visually stunning and immersive experience that celebrates the beauty and diversity of our feathered friends.")
+st.markdown("Example prompt: Generate a captivating and vibrant digital artwork featuring a diverse array of birds in a lush, otherworldly aviary.")
 st.text(" \n")
 
 # image_name = ""
@@ -190,9 +190,10 @@ if st.sidebar.button("Purchase"):
         image_name = st.session_state.image_name
         image_url = st.session_state.image_url 
         image_hash = st.session_state.image_hash
-        purchaseAddress = address(st.session_state.purchaseAddress)
+        purchaseAddress = st.session_state.purchaseAddress   
 
-        print(f"ADDRESS!!!: {purchaseAddress}")        
+        st.write(f"Your NFT was generated with ID: {image_name}")
+        st.image(f"generated_images/{image_name}", width=800)
 
         # # Use the `pin_artwork` helper function to pin the file to IPFS
         nft_ipfs_hash, token_json = pin_nft(image_name, image_url)
@@ -205,7 +206,7 @@ if st.sidebar.button("Purchase"):
             100000000000000000, # purchasePrice 
             image_hash,
             nft_uri #tokenURI
-        ).transact({"from": purchaseAddress, "gas": 1000000})
+        ).transact({"from": purchaseAddress, "gas": 3000000})
         receipt = w3.eth.waitForTransactionReceipt(tx_hash)
         
         st.sidebar.write("Transaction receipt mined:")
