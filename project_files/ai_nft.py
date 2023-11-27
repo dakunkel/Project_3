@@ -22,7 +22,7 @@ ai_api_key = os.getenv("DEEPAI")
 ################################################################################
 # Load_Contract Function
 ################################################################################
-@st.cache(allow_output_mutation=True)
+@st.cache_resource
 def load_contract():
 
     # Load the contract ABI
