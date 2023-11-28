@@ -133,7 +133,7 @@ pip install os requests web3 python-io json dotenv pillow hashlib streamlit
 ## Files
 * [Python application with Streamlit integration](./project_files/ai_nft.py)
 * [Solidity Smart Contract](./project_files/AI_NFT.sol)
-* [Customer Pinata API](./project_files/pinata.py)
+* [Custom Pinata API](./project_files/pinata.py)
 
 ## Team Information
 Group 3 - The Ripples
