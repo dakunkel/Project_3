@@ -14,7 +14,7 @@ Over the last few years, two groundbreaking concepts have emerged as pinnacles o
 
 We’ve created a platform where users can effortlessly generate tokens of personalized artwork. By simply typing in their preferences, users can harness the power of Artificial Intelligence to craft and mint distinct NFT images on the blockchain. To do this, we created a  smart contact using a mixture of Python and Solidity, while utilizing Streamlit as the user’s frontend interface. 
  
-The marrying of NFTs and AI within our platform represents the forward thinking application of these concepts in fintech. Both concepts have already begun to disturb the industry. As time goes on we’ll continue to see the convergence of NFTs and AI in FinTech. 
+The marrying of NFTs and AI within our platform represents the forward thinking application of these concepts in FinTech. Both concepts have already begun to disturb the industry. As time goes on we’ll continue to see the convergence of NFTs and AI in FinTech. 
 
 ### Functionality Included:
 - Ability to create, transact and own Artificial Intelligence generated NFT Asset using Ethereum blockchain network.
