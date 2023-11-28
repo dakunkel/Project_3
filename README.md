@@ -1,4 +1,4 @@
-# FinTech Capstone Project - NFT Creator by *Team Ripples*
+# FinTech Capstone Project - AI ART Revolutionizing NFTs by *Team Ripples*
 
 ## Table of Contents
 * [Summary](#summary)
