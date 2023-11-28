@@ -131,18 +131,6 @@ st.markdown("Example prompt: Generate a captivating and vibrant digital artwork 
 st.text(" \n")
 
 ################################################
-# Streamlit Sidebar Code - Start
-
-st.sidebar.markdown("# Do you want to buy your NFT?")
-st.sidebar.markdown("## Enter Your Account Address")
-st.sidebar.markdown("Cost: :green[0.10] ETH")
-
-# set purchase address as session var to prevent data from getting cleared
-purchaseAddress = st.sidebar.text_input("Account Address")
-st.session_state.purchaseAddress = purchaseAddress
-
-
-################################################
 text_input_for_AI_call = st.text_input("What do you want to see in your image?")
 if st.button("Make me an NFT"):
 
@@ -169,13 +157,31 @@ if st.button("Make me an NFT"):
     st.markdown(f"Image ID: {image_name}")
     st.markdown(f"Image Hash: {image_hash}")
 
+
+################################################
+# Streamlit Sidebar Code - Start
+
+st.sidebar.markdown("# Do you want to buy your NFT?")
+st.sidebar.markdown("## Enter Your Account Address")
+st.sidebar.markdown("Cost: :green[0.10] ETH")
+
+# set purchase address as session var to prevent data from getting cleared
+purchaseAddress = st.sidebar.text_input("Account Address")
+st.session_state.purchaseAddress = purchaseAddress
+
 ################################################################################
 # Purchase new NFT
 ################################################################################
 if st.sidebar.button("Purchase"):
-    
+
+    # only allow purchase if NFT has been generated
+    if ("image_name" not in st.session_state 
+        or "image_url" not in st.session_state
+        or "image_hash" not in st.session_state):
+        st.sidebar.error("You haven't made an NFT yet")
+
     # reload all session variables. only proceed if all are present
-    if (st.session_state.image_name 
+    elif (st.session_state.image_name 
         and st.session_state.image_url 
         and st.session_state.image_hash
         and st.session_state.purchaseAddress):
@@ -202,15 +208,14 @@ if st.sidebar.button("Purchase"):
         ).transact({"from": purchaseAddress, "gas": 3000000})
         receipt = w3.eth.waitForTransactionReceipt(tx_hash)
 
+        st.balloons()
+        
         st.sidebar.write("You can view the pinned metadata file with the following IPFS Gateway Link")
         st.sidebar.markdown(f"[Your NFT IPFS Gateway Link](https://ipfs.io/ipfs/{nft_ipfs_hash})")
         st.sidebar.markdown(f"[Your NFT IPFS Image Link](https://ipfs.io/ipfs/{token_json['image']})")
-        
+
         # show proof of transaction
         st.sidebar.write("Transaction receipt mined:")
         st.sidebar.write(dict(receipt))
-
-    else:
-        st.write("You haven't made an NFT yet")
 
 st.markdown("---")
