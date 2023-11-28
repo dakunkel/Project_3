@@ -202,12 +202,14 @@ if st.sidebar.button("Purchase"):
         ).transact({"from": purchaseAddress, "gas": 3000000})
         receipt = w3.eth.waitForTransactionReceipt(tx_hash)
 
+        st.sidebar.write("You can view the pinned metadata file with the following IPFS Gateway Link")
+        st.sidebar.markdown(f"[Your NFT IPFS Gateway Link](https://ipfs.io/ipfs/{nft_ipfs_hash})")
+        st.sidebar.markdown(f"[Your NFT IPFS Image Link](https://ipfs.io/ipfs/{token_json['image']})")
+        
         # show proof of transaction
         st.sidebar.write("Transaction receipt mined:")
         st.sidebar.write(dict(receipt))
-        st.sidebar.write("You can view the pinned metadata file with the following IPFS Gateway Link")
-        st.sidebar.markdown(f"[Artwork IPFS Gateway Link](https://ipfs.io/ipfs/{nft_ipfs_hash})")
-        st.sidebar.markdown(f"[Artwork IPFS Image Link](https://ipfs.io/ipfs/{token_json['image']})")
+
     else:
         st.write("You haven't made an NFT yet")
 
